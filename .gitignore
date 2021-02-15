@@ -1,0 +1,33 @@
+# Environment Variables file
+# I love dot-env files <3
+*.env
+.env.txt
+
+# Python cache files
+*.pyc
+*__pycache__
+
+# Static files
+static
+
+# UNIX Sockets
+*.sock
+
+# Python virtual environments
+*venv
+*.venv
+
+# Log files (if any)
+logs
+
+# Useless; Idiot IDE-generated stuff
+.idea
+.vscode
+
+# Other stuff
+# What the STUFF is this!
+*.DS_Store
+
+# Django development database
+*.sqlite
+*.sqlite3
