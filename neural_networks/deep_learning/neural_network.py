@@ -20,10 +20,13 @@ def sigmoid_derivative(x: np.ndarray) -> np.ndarray:
 
 class SimpleNeuralNetwork:
     def __init__(
-            self, X: np.ndarray, Y: np.ndarray, hidden_layer_size: int = 4,
-            alpha: int = 1
+        self,
+        X: np.ndarray,
+        Y: np.ndarray,
+        hidden_layer_size: int = 4,
+        alpha: float = 1.0,
     ):
-        self.alpha: int = alpha
+        self.alpha: float = alpha
         self.X: np.ndarray = X
         self.Y: np.ndarray = Y
         self.weights_1: np.ndarray = np.random.rand(self.X.shape[1], hidden_layer_size)
@@ -32,6 +35,9 @@ class SimpleNeuralNetwork:
         self.Y_predicted: np.ndarray = np.zeros(self.Y.shape)
 
     def feed(self):
+        """
+        Compute the output of the hidden layers and the output layer
+        """
         self.hidden_layer = sigmoid(np.dot(self.X, self.weights_1))
         self.Y_predicted = sigmoid(np.dot(self.hidden_layer, self.weights_2))
 
@@ -44,27 +50,24 @@ class SimpleNeuralNetwork:
         """
         delta_weights_2 = np.dot(
             self.hidden_layer.T,
-            2 * (self.Y - self.Y_predicted) * sigmoid_derivative(self.Y_predicted),
+            (self.Y_predicted - self.Y) * sigmoid_derivative(self.Y_predicted),
         )
         delta_weights_1 = np.dot(
             self.X.T,
             np.dot(
-                2 * (self.Y - self.Y_predicted) * sigmoid_derivative(self.Y_predicted),
+                (self.Y_predicted - self.Y) * sigmoid_derivative(self.Y_predicted),
                 self.weights_2.T,
             )
             * sigmoid_derivative(self.hidden_layer),
         )
 
-        # self.weights_1 = self.weights_1 - self.alpha * delta_weights_1
-        # self.weights_2 = self.weights_2 - self.alpha * delta_weights_2
-
-        self.weights_1 += delta_weights_1
-        self.weights_2 += delta_weights_2
+        self.weights_1 = self.weights_1 - self.alpha * delta_weights_1
+        self.weights_2 = self.weights_2 - self.alpha * delta_weights_2
 
     @property
     def loss(self):
         """
-        Mean Squared Sum
+        Mean Squared Error
         """
         return np.mean(np.square(self.Y - self.Y_predicted))
 
@@ -75,9 +78,9 @@ class SimpleNeuralNetwork:
 
 if __name__ == "__main__":
     X = np.array(([0, 0], [0, 1], [1, 0], [1, 1]), dtype=float)
-    y = np.array(([0], [1], [1], [0]), dtype=float)
+    y = np.array(([0], [1], [1], [1]), dtype=float)
 
-    neural_network = SimpleNeuralNetwork(X, y, hidden_layer_size=4)
+    neural_network = SimpleNeuralNetwork(X, y, hidden_layer_size=4, alpha=1)
     epoch = 1000
 
     for i in range(epoch):
