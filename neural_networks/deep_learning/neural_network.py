@@ -78,7 +78,7 @@ class SimpleNeuralNetwork:
 
 if __name__ == "__main__":
     X = np.array(([0, 0], [0, 1], [1, 0], [1, 1]), dtype=float)
-    y = np.array(([0], [1], [1], [1]), dtype=float)
+    y = np.array(([0], [1], [1], [0]), dtype=float)
 
     neural_network = SimpleNeuralNetwork(X, y, hidden_layer_size=4, alpha=1)
     epoch = 1000
