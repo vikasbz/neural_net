@@ -7,8 +7,7 @@ def sigmoid(x: np.ndarray) -> np.ndarray:
 
     Sigmoid f(x) = 1 / (1 + e^(-x))
     """
-    x = 1 / (1 + np.exp(-x))
-    return x
+    return 1 / (1 + np.exp(-x))
 
 
 def sigmoid_derivative(x: np.ndarray) -> np.ndarray:
@@ -20,11 +19,11 @@ def sigmoid_derivative(x: np.ndarray) -> np.ndarray:
 
 class SimpleNeuralNetwork:
     def __init__(
-        self,
-        X: np.ndarray,
-        Y: np.ndarray,
-        hidden_layer_size: int = 4,
-        alpha: float = 1.0,
+            self,
+            X: np.ndarray,
+            Y: np.ndarray,
+            hidden_layer_size: int = 4,
+            alpha: float = 1.0,
     ):
         self.alpha: float = alpha
         self.X: np.ndarray = X
