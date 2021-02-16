@@ -19,18 +19,18 @@ def sigmoid_derivative(x: np.ndarray) -> np.ndarray:
 
 class SimpleNeuralNetwork:
     def __init__(
-            self,
-            X: np.ndarray,
-            Y: np.ndarray,
-            hidden_layer_size: int = 4,
-            alpha: float = 1.0,
+        self,
+        X: np.ndarray,
+        Y: np.ndarray,
+        hidden_layer_size: int = 4,
+        alpha: float = 1.0,
     ):
         self.alpha: float = alpha
         self.X: np.ndarray = X
         self.Y: np.ndarray = Y
         self.weights_1: np.ndarray = np.random.rand(self.X.shape[1], hidden_layer_size)
         self.hidden_layer: np.ndarray = None
-        self.weights_2: np.ndarray = np.random.rand(hidden_layer_size, 1)
+        self.weights_2: np.ndarray = np.random.rand(hidden_layer_size, 2)
         self.Y_predicted: np.ndarray = np.zeros(self.Y.shape)
 
     def feed(self):
@@ -75,12 +75,30 @@ class SimpleNeuralNetwork:
         self.update_weights()
 
 
+def max_element(a: np.ndarray) -> float:
+    return np.unravel_index(a.argmax(), a.shape)[0]
+
+
 if __name__ == "__main__":
-    X = np.array(([0, 0], [0, 1], [1, 0], [1, 1]), dtype=float)
-    y = np.array(([0], [1], [1], [0]), dtype=float)
+    X = np.array(
+        (
+            [0, 0, 0],
+            [0, 0, 1],
+            [0, 1, 0],
+            [0, 1, 1],
+            [1, 0, 0],
+            [1, 0, 1],
+            [1, 1, 0],
+            [1, 1, 1],
+        ),
+        dtype=float,
+    )
+    y = np.array(
+        ([0, 1], [1, 0], [1, 0], [1, 0], [1, 0], [1, 0], [1, 0], [0, 1]), dtype=float
+    )
 
     neural_network = SimpleNeuralNetwork(X, y, hidden_layer_size=4, alpha=1)
-    epoch = 1000
+    epoch = 500
 
     for i in range(epoch):
         if i % 100 == 0:
@@ -88,6 +106,9 @@ if __name__ == "__main__":
             print(f"X: {neural_network.X}")
             print(f"Y: {neural_network.Y}")
             print(f"Y_predicted: {neural_network.Y_predicted}")
+            print(
+                f"Y_predicted class: {list(map(max_element, neural_network.Y_predicted))}"
+            )
             print(f"Loss: {neural_network.loss}")
             print("\n")
 
