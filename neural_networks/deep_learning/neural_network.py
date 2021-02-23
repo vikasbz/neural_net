@@ -1,4 +1,3 @@
-# A simple neural network
 import numpy as np
 
 
@@ -98,8 +97,8 @@ if __name__ == "__main__":
         ([0, 1], [1, 0], [1, 0], [1, 0], [1, 0], [1, 0], [1, 0], [0, 1]), dtype=float
     )
 
-    neural_network = SimpleNeuralNetwork(X, y, hidden_layer_size=4, alpha=1)
-    epoch = 500
+    neural_network = SimpleNeuralNetwork(X, y, hidden_layer_size=4, alpha=1.5)
+    epoch = 1000
 
     for i in range(epoch):
         if i % 100 == 0:
