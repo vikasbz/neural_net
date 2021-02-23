@@ -97,7 +97,7 @@ if __name__ == "__main__":
         ([0, 1], [1, 0], [1, 0], [1, 0], [1, 0], [1, 0], [1, 0], [0, 1]), dtype=float
     )
 
-    neural_network = SimpleNeuralNetwork(X, y, hidden_layer_size=4, alpha=1.5)
+    neural_network = SimpleNeuralNetwork(X, y, hidden_layer_size=4, alpha=1.6)
     epoch = 1000
 
     for i in range(epoch):
