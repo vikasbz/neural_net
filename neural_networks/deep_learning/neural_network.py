@@ -1,3 +1,4 @@
+# A simple neural network
 import numpy as np
 
 
