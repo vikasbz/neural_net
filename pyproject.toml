@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "neural_networks"
+name = "neural_net"
 version = "0.1.0"
 description = ""
 authors = ["vikasz-skillate <Vikas Z <vikas.zingade@skillate.com>>"]

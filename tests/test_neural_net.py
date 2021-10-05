@@ -1,4 +1,4 @@
-from neural_networks import __version__
+from neural_net import __version__
 
 
 def test_version():
