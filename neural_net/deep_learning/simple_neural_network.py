@@ -97,19 +97,17 @@ if __name__ == "__main__":
         ([0, 1], [1, 0], [1, 0], [1, 0], [1, 0], [1, 0], [1, 0], [0, 1]), dtype=float
     )
 
-    neural_network = SimpleNeuralNetwork(X, y, hidden_layer_size=4, alpha=1.6)
-    epoch = 1000
+    nn = SimpleNeuralNetwork(X, y, hidden_layer_size=4, alpha=1.6)
 
+    epoch = 1000
     for i in range(epoch):
         if i % 100 == 0:
             print(f"-- Iteration: {i} --")
-            print(f"X: {neural_network.X}")
-            print(f"Y: {neural_network.Y}")
-            print(f"Y_predicted: {neural_network.Y_predicted}")
-            print(
-                f"Y_predicted class: {list(map(max_element, neural_network.Y_predicted))}"
-            )
-            print(f"Loss: {neural_network.loss}")
+            print(f"X: {nn.X}")
+            print(f"Y: {nn.Y}")
+            print(f"Y_predicted: {nn.Y_predicted}")
+            print(f"Y_predicted class: {list(map(max_element, nn.Y_predicted))}")
+            print(f"Loss: {nn.loss}")
             print("\n")
 
-        neural_network.train()
+        nn.train()
